@@ -2,9 +2,6 @@ package cookieverse.block;
 
 import java.util.Random;
 
-import cookieverse.Config;
-import cookieverse.CookieverseTeleporter;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -13,6 +10,8 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import cookieverse.Config;
+import cookieverse.CookieverseTeleporter;
 
 public class BlockCookiePortal extends Block {
 
@@ -20,6 +19,22 @@ public class BlockCookiePortal extends Block {
 
 	public BlockCookiePortal(int par1, Material par2Material) {
 		super(par1, par2Material);
+		this.setTickRandomly(true);
+	}
+
+	@Override
+	public void updateTick(World par1World, int par2, int par3, int par4,
+			Random par5Random) {
+		int n = 0;
+		for(ForgeDirection dir : dirs) {
+			int blockID = par1World.getBlockId(par2 + dir.offsetX, par3 + dir.offsetY, par4 + dir.offsetZ);
+			if(blockID == Blocks.blockChocolate.blockID || blockID == this.blockID) {
+				n++;
+			}
+		}
+		if(n < 4) {
+			par1World.setBlockToAir(par2, par3, par4);
+		}
 	}
 
 	@Override
@@ -27,12 +42,12 @@ public class BlockCookiePortal extends Block {
 			int par2, int par3, int par4) {
 		return null;
 	}
-
-	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess,
+@Override
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World,
 			int par2, int par3, int par4) {
-		this.setBlockBounds(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
+		return AxisAlignedBB.getAABBPool().getAABB(0,0,0,0,0,0);
 	}
+
 
 	@Override
 	public boolean isOpaqueCube() {
@@ -47,14 +62,22 @@ public class BlockCookiePortal extends Block {
 	@Override
 	public void onNeighborBlockChange(World par1World, int par2, int par3,
 			int par4, int par5) {
-		boolean found = false;
+		int n = 0;
 		for(ForgeDirection dir : dirs) {
 			int blockID = par1World.getBlockId(par2 + dir.offsetX, par3 + dir.offsetY, par4 + dir.offsetZ);
-			if(blockID == Blocks.cookie.blockID) {
-				return;
+			if(blockID == Blocks.blockChocolate.blockID || blockID == this.blockID) {
+				n++;
 			}
 		}
-		par1World.setBlockToAir(par2, par3, par4);
+		if(n < 4) {
+			par1World.setBlockToAir(par2, par3, par4);
+		}
+	}
+
+	@Override
+	public boolean isBlockSolid(IBlockAccess par1iBlockAccess, int par2,
+			int par3, int par4, int par5) {
+		return false;
 	}
 
 	@Override
@@ -84,30 +107,30 @@ public class BlockCookiePortal extends Block {
 			int par4, Random par5Random) {
 
 		if (par5Random.nextInt(100) == 0) {
-			par1World.playSound((double) par2 + 0.5D, (double) par3 + 0.5D,
-					(double) par4 + 0.5D, "portal.portal", 0.5F,
+			par1World.playSound(par2 + 0.5D, par3 + 0.5D,
+					par4 + 0.5D, "portal.portal", 0.5F,
 					par5Random.nextFloat() * 0.4F + 0.8F, false);
 		}
 
 		for (int l = 0; l < 4; ++l) {
-			double d0 = (double) ((float) par2 + par5Random.nextFloat());
-			double d1 = (double) ((float) par3 + par5Random.nextFloat());
-			double d2 = (double) ((float) par4 + par5Random.nextFloat());
+			double d0 = (par2 + par5Random.nextFloat());
+			double d1 = (par3 + par5Random.nextFloat());
+			double d2 = (par4 + par5Random.nextFloat());
 			double d3 = 0.0D;
 			double d4 = 0.0D;
 			double d5 = 0.0D;
 			int i1 = par5Random.nextInt(2) * 2 - 1;
-			d3 = ((double) par5Random.nextFloat() - 0.5D) * 0.5D;
-			d4 = ((double) par5Random.nextFloat() - 0.5D) * 0.5D;
-			d5 = ((double) par5Random.nextFloat() - 0.5D) * 0.5D;
+			d3 = (par5Random.nextFloat() - 0.5D) * 0.5D;
+			d4 = (par5Random.nextFloat() - 0.5D) * 0.5D;
+			d5 = (par5Random.nextFloat() - 0.5D) * 0.5D;
 
 			if (par1World.getBlockId(par2 - 1, par3, par4) != this.blockID
 					&& par1World.getBlockId(par2 + 1, par3, par4) != this.blockID) {
-				d0 = (double) par2 + 0.5D + 0.25D * (double) i1;
-				d3 = (double) (par5Random.nextFloat() * 2.0F * (float) i1);
+				d0 = par2 + 0.5D + 0.25D * i1;
+				d3 = (par5Random.nextFloat() * 2.0F * i1);
 			} else {
-				d2 = (double) par4 + 0.5D + 0.25D * (double) i1;
-				d5 = (double) (par5Random.nextFloat() * 2.0F * (float) i1);
+				d2 = par4 + 0.5D + 0.25D * i1;
+				d5 = (par5Random.nextFloat() * 2.0F * i1);
 			}
 
 			par1World.spawnParticle("portal", d0, d1, d2, d3, d4, d5);

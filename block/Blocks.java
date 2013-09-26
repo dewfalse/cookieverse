@@ -48,7 +48,7 @@ public class Blocks {
 
 	//public static Block sugarGas = new Block(Config.sugarGasID, Material.air).setHardness(0.0F).setUnlocalizedName("cookieverse:sugarGas").func_111022_d("cookieverse:sugarGas").setCreativeTab(Cookieverse.creativeTab);
 
-	public static Block portal = new BlockCookiePortal(Config.portalID, Material.portal).setHardness(-1.0F).setResistance(6000000.0F).setUnlocalizedName("cookieverse:portal").setCreativeTab(Cookieverse.creativeTab);
+	public static Block portal = new BlockCookiePortal(Config.portalID, Material.portal).setLightValue(0.1F).setHardness(-1.0F).setResistance(6000000.0F).setUnlocalizedName("cookieverse:portal").setCreativeTab(Cookieverse.creativeTab);
 
 	public static Fluid milkFluid = new Fluid("milk").setBlockID(milkStill.blockID);
 	public static Fluid hotChocolateFluid = new Fluid("hotChocolate").setBlockID(hotChocolateStill.blockID);

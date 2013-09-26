@@ -6,12 +6,8 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.boss.IBossDisplayData;
-import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.LongHashMap;
 import net.minecraft.util.MathHelper;
@@ -28,7 +24,7 @@ public class CookieverseTeleporter extends Teleporter {
 	private final LongHashMap destinationCoordinateCache = new LongHashMap();
 	private final List destinationCoordinateKeys = new ArrayList();
 
-    public CookieverseTeleporter(WorldServer par1WorldServer) {
+	public CookieverseTeleporter(WorldServer par1WorldServer) {
 		super(par1WorldServer);
 		this.worldServerInstance = par1WorldServer;
 		this.random = new Random(par1WorldServer.getSeed());
@@ -56,56 +52,8 @@ public class CookieverseTeleporter extends Teleporter {
 				}
 				return false;
 			}
-			if (par1Entity instanceof EntityLiving == false
-					&& par1Entity instanceof EntityMinecart == false) {
-				return false;
-			}
-			MinecraftServer minecraftserver = MinecraftServer.getServer();
-			int dimOld = par1Entity.dimension;
-			WorldServer worldserver = minecraftserver
-					.worldServerForDimension(dimOld);
-			WorldServer worldserver1 = minecraftserver
-					.worldServerForDimension(dim);
-			par1Entity.dimension = dim;
-
-			par1Entity.worldObj.removeEntity(par1Entity);
-			par1Entity.isDead = false;
-			minecraftserver.getConfigurationManager().transferEntityToWorld(
-					par1Entity, dimOld, worldserver, worldserver1,
-					new CookieverseTeleporter(worldserver1));
-			Entity entity = EntityList.createEntityByName(
-					EntityList.getEntityString(par1Entity), worldserver1);
-
-			if (entity != null) {
-				entity.copyDataFrom(par1Entity, true);
-				int x = (int) par1Entity.posX;
-				int y = (int) par1Entity.posY;
-				int z = (int) par1Entity.posZ;
-				int j = y;
-				for (; j < 255; ++j) {
-					if (worldserver1.getBlockId(x, j, z) != 0)
-						continue;
-					if (worldserver1.getBlockId(x, j + 1, z) != 0)
-						continue;
-					if (worldserver1.getBlockId(x, j + 2, z) != 0)
-						continue;
-					break;
-				}
-				for (; j > 0; --j) {
-					if (worldserver1.getBlockId(x, j, z) == 0)
-						continue;
-					break;
-				}
-				par1Entity.setLocationAndAngles(x + 1, j + 1, z + 1, 0, 0);
-				worldserver1.spawnEntityInWorld(entity);
-			}
-
-			par1Entity.isDead = true;
-			worldserver.resetUpdateEntityTick();
-			worldserver1.resetUpdateEntityTick();
-			return true;
 		}
-		return true;
+		return false;
 	}
 
 	private static boolean transferPlayerToDimension(Entity par1Entity, int dim) {
@@ -161,13 +109,13 @@ public class CookieverseTeleporter extends Teleporter {
 						int i2 = k + i1 * b1 - l * b0;
 						boolean flag = j1 < 0;
 						this.worldServerInstance.setBlock(k1, l1, i2,
-								flag ? Blocks.cookie.blockID : 0);
+								flag ? Blocks.blockChocolate.blockID : 0);
 					}
 				}
 			}
 
-			par1Entity.setLocationAndAngles(i, j, k,
-					par1Entity.rotationYaw, 0.0F);
+			par1Entity.setLocationAndAngles(i, j, k, par1Entity.rotationYaw,
+					0.0F);
 			par1Entity.motionX = par1Entity.motionY = par1Entity.motionZ = 0.0D;
 		}
 	}
@@ -329,8 +277,7 @@ public class CookieverseTeleporter extends Teleporter {
 				double d11 = par1Entity.motionZ;
 				par1Entity.motionX = d10 * f3 + d11 * f6;
 				par1Entity.motionZ = d10 * f5 + d11 * f4;
-				par1Entity.rotationYaw = par8 - (k2 * 90)
-						+ (j2 * 90);
+				par1Entity.rotationYaw = par8 - (k2 * 90) + (j2 * 90);
 			} else {
 				par1Entity.motionX = par1Entity.motionY = par1Entity.motionZ = 0.0D;
 			}
@@ -520,7 +467,7 @@ public class CookieverseTeleporter extends Teleporter {
 						i4 = j2 + (i3 - 1) * l5 - k2 * k5;
 						flag = l2 < 0;
 						this.worldServerInstance.setBlock(k3, j3, i4,
-								flag ? Blocks.cookie.blockID : 0);
+								flag ? Blocks.blockChocolate.blockID : 0);
 					}
 				}
 			}
@@ -534,7 +481,7 @@ public class CookieverseTeleporter extends Teleporter {
 					i4 = j2 + (i3 - 1) * l5;
 					flag = i3 == 0 || i3 == 3 || l2 == -1 || l2 == 3;
 					this.worldServerInstance.setBlock(k3, j3, i4,
-							flag ? Blocks.cookie.blockID
+							flag ? Blocks.blockChocolate.blockID
 									: Blocks.portal.blockID, 0, 2);
 				}
 			}
