@@ -18,7 +18,7 @@ public class BiomeGenChocolateCookieDough extends BiomeGenCookieverse {
 		this.theBiomeDecorator.ironGen = new WorldGenMinable(Blocks.oreChocolate.blockID, 8, mainBlockID);
 		this.theBiomeDecorator.goldGen = new WorldGenMinable(Blocks.oreWhiteChocolate.blockID, 8, mainBlockID);
 		this.theBiomeDecorator.redstoneGen = new WorldGenMinable(Blocks.oreBlackChocolate.blockID, 7, mainBlockID);
-		this.theBiomeDecorator.diamondGen = new WorldGenMinable(Block.oreDiamond.blockID, 7, mainBlockID);
+		this.theBiomeDecorator.diamondGen = new WorldGenMinable(Block.blockGold.blockID, 3, mainBlockID);
 		this.theBiomeDecorator.lapisGen = new WorldGenMinable(Blocks.whiteChocolateCookie.blockID, 6, mainBlockID);
 		this.worldGeneratorTrees = new WorldGeneratorCookieTrees(false, Blocks.chocolateCookie.blockID);
 	}
