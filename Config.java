@@ -73,6 +73,7 @@ public class Config {
 	public static int biomeID;
 	public static int villagerID;
 	public static int blackSmithID;
+	public static boolean setBedrock;
 
 	public static void preInit(File file) {
 		Configuration cfg = new Configuration(file);
@@ -141,6 +142,7 @@ public class Config {
 			biomeID = cfg.get(Configuration.CATEGORY_GENERAL, "biomeID", 60).getInt();
 			villagerID = cfg.get(Configuration.CATEGORY_GENERAL, "villagerID", 12).getInt();
 			blackSmithID = cfg.get(Configuration.CATEGORY_GENERAL, "blackSmithID", 13).getInt();
+			setBedrock = cfg.get(Configuration.CATEGORY_GENERAL, "setBedrock", false).getBoolean(false);
 			cfg.save();
 		} catch (Exception e) {
 			FMLLog.log(Level.SEVERE, e, Cookieverse.modid + " load config exception");

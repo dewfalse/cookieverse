@@ -40,6 +40,7 @@ import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
+import cookieverse.Config;
 import cookieverse.block.Blocks;
 
 public class ChunkProviderCookieverse implements
@@ -340,6 +341,9 @@ IChunkProvider {
 						else if(blockID == Block.ice.blockID) {
 							blockID = (short) Blocks.milkStill.blockID;
 						}
+					}
+					if(Config.setBedrock && y == 0) {
+						blockID = (short) Block.bedrock.blockID;
 					}
 					ids[y << 8 | z << 4 | x] = (short) blockID;
 				}
