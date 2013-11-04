@@ -66,6 +66,7 @@ public class Config {
 	public static int bucketHotChocolateID;
 	public static int cookieSeedsID;
 	public static int exoticNutsID;
+	public static int strangeNutsID;
 
 	public static int dimensionID;
 	public static int providerType;
@@ -133,6 +134,7 @@ public class Config {
 			bucketHotChocolateID = cfg.getItem("bucketHotChocolateID", 5025).getInt();
 			cookieSeedsID = cfg.getItem("cookieSeedID", 5026).getInt();
 			exoticNutsID = cfg.getItem("exoticNutsID", 5027).getInt();
+			strangeNutsID = cfg.getItem("strangeNutsID", 5028).getInt();
 
 			dimensionID = cfg.get(Configuration.CATEGORY_GENERAL, "dimensionID", 10).getInt();
 			providerType = cfg.get(Configuration.CATEGORY_GENERAL, "providerType", 10).getInt();

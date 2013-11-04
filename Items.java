@@ -32,6 +32,7 @@ public class Items {
 	public static Item bucketHotChocolate = (new ItemBucket(Config.bucketHotChocolateID, Blocks.hotChocolateMoving.blockID)).setUnlocalizedName("cookieverse:bucketHotChocolate").setContainerItem(Item.bucketEmpty).func_111206_d("cookieverse:bucket_hot_chocolate").setCreativeTab(Cookieverse.creativeTab);
 	public static Item cookieGun;
 	public static Item exoticNuts = new ItemExoticNuts(Config.exoticNutsID, 1, 0.1F, false).setAlwaysEdible().setUnlocalizedName("cookieverse:exoticNuts").func_111206_d("cookieverse:exoticNuts").setCreativeTab(Cookieverse.creativeTab);
+	public static Item strangeNuts = new ItemStrangeNuts(Config.strangeNutsID, 1, 0.1F, false).setAlwaysEdible().setUnlocalizedName("cookieverse:strangeNuts").func_111206_d("cookieverse:exoticNuts").setCreativeTab(Cookieverse.creativeTab);
 
 
 	public static EnumToolMaterial materialChocolate = EnumHelper.addToolMaterial("chocolate", 1, 200, 5.0F, 1.2F, 20);
@@ -92,6 +93,7 @@ public class Items {
 
 		addNameForObject(cookieSeeds, "cookieSeeds", "クッキーの種");
 		addNameForObject(exoticNuts, "exoticNuts", "エキゾチックなナッツ");
+		addNameForObject(strangeNuts, "strangeNuts", "奇妙なナッツ");
 
 		MinecraftForge.setToolClass(shovelChocolate, "shovel", 1);
 		MinecraftForge.setToolClass(pickaxeChocolate, "pickaxe", 1);
