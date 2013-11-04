@@ -1,10 +1,24 @@
 package cookieverse.entity;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import cookieverse.Config;
 import cookieverse.block.Blocks;
 
 public class EntityMilkreeper extends EntityCreeper {
+
+	boolean attacked;
+	@Override
+	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
+		Entity src = par1DamageSource.getSourceOfDamage();
+		if(src != null && src instanceof EntityLivingBase && Config.milkExplosion) {
+			attacked = true;
+		}
+		return super.attackEntityFrom(par1DamageSource, par2);
+	}
 
 	public EntityMilkreeper(World par1World) {
 		super(par1World);
