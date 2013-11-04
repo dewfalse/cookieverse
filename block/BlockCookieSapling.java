@@ -12,6 +12,8 @@ import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.terraingen.SaplingGrowTreeEvent;
 import cookieverse.world.WorldGeneratorCookieTrees;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCookieSapling extends BlockSapling {
 
@@ -19,11 +21,13 @@ public class BlockCookieSapling extends BlockSapling {
 		super(par1);
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public Icon getIcon(int par1, int par2) {
 		return blockIcon;
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IconRegister par1IconRegister) {
 		this.blockIcon = par1IconRegister.registerIcon("cookieverse:cookieSapling");
