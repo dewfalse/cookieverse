@@ -9,6 +9,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemExoticNuts extends ItemFood {
 
@@ -25,6 +27,7 @@ public class ItemExoticNuts extends ItemFood {
 		return true;
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public EnumRarity getRarity(ItemStack par1ItemStack) {
 		return EnumRarity.epic;
@@ -58,4 +61,5 @@ public class ItemExoticNuts extends ItemFood {
 			event.setResult(Result.ALLOW);
 		}
 	}
+
 }
