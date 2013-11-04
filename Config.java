@@ -74,6 +74,7 @@ public class Config {
 	public static int villagerID;
 	public static int blackSmithID;
 	public static int echantmentBaseID;
+	public static boolean cookieVillage;
 	public static boolean setBedrock;
 
 	public static void preInit(File file) {
@@ -144,6 +145,7 @@ public class Config {
 			villagerID = cfg.get(Configuration.CATEGORY_GENERAL, "villagerID", 12).getInt();
 			blackSmithID = cfg.get(Configuration.CATEGORY_GENERAL, "blackSmithID", 13).getInt();
 			echantmentBaseID = cfg.get(Configuration.CATEGORY_GENERAL, "echantmentBaseID", 77).getInt();
+			cookieVillage = cfg.get(Configuration.CATEGORY_GENERAL, "cookieVillage", true).getBoolean(true);
 			setBedrock = cfg.get(Configuration.CATEGORY_GENERAL, "setBedrock", false).getBoolean(false);
 			cfg.save();
 		} catch (Exception e) {
