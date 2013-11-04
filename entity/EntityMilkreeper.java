@@ -28,7 +28,7 @@ public class EntityMilkreeper extends EntityCreeper {
 	public void onUpdate() {
 		if (this.isEntityAlive()) {
 			super.onUpdate();
-			if (this.isDead) {
+			if (this.isDead && Config.milkExplosion) {
 				for (int i = 0; i < this.rand.nextInt(5) + 1; ++i) {
 					int x = (int) (this.posX + this.rand.nextInt(10) - 5);
 					int y = (int) (this.posY + this.rand.nextInt(10) - 5);

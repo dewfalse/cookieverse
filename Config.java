@@ -76,6 +76,7 @@ public class Config {
 	public static int echantmentBaseID;
 	public static boolean cookieVillage;
 	public static boolean setBedrock;
+	public static boolean milkExplosion;
 
 	public static void preInit(File file) {
 		Configuration cfg = new Configuration(file);
@@ -147,6 +148,7 @@ public class Config {
 			echantmentBaseID = cfg.get(Configuration.CATEGORY_GENERAL, "echantmentBaseID", 77).getInt();
 			cookieVillage = cfg.get(Configuration.CATEGORY_GENERAL, "cookieVillage", true).getBoolean(true);
 			setBedrock = cfg.get(Configuration.CATEGORY_GENERAL, "setBedrock", false).getBoolean(false);
+			milkExplosion = cfg.get(Configuration.CATEGORY_GENERAL, "milkExplosion", true).getBoolean(true);
 			cfg.save();
 		} catch (Exception e) {
 			FMLLog.log(Level.SEVERE, e, Cookieverse.modid + " load config exception");
