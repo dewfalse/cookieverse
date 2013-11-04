@@ -47,13 +47,13 @@ public class Cookieverse {
 		Recipes.init();
 		Village.init();
 		proxy.init();
+		Enchantments.init();
 
 		WorldChunkManagerCookieverse.init();
 		DimensionManager.registerProviderType(Config.providerType, WorldProviderCookieverse.class, false);
 		DimensionManager.registerDimension(Config.dimensionID, Config.providerType);
 
 		MinecraftForge.EVENT_BUS.register(new FillBucketEventHandler());
-		MinecraftForge.EVENT_BUS.register(Items.exoticNuts);
 		MinecraftForge.EVENT_BUS.register(new EntityJoinInWorldEventHandler());
 		MinecraftForge.TERRAIN_GEN_BUS.register(Blocks.cookieSapling);
 

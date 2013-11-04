@@ -73,6 +73,7 @@ public class Config {
 	public static int biomeID;
 	public static int villagerID;
 	public static int blackSmithID;
+	public static int echantmentBaseID;
 	public static boolean setBedrock;
 
 	public static void preInit(File file) {
@@ -142,6 +143,7 @@ public class Config {
 			biomeID = cfg.get(Configuration.CATEGORY_GENERAL, "biomeID", 60).getInt();
 			villagerID = cfg.get(Configuration.CATEGORY_GENERAL, "villagerID", 12).getInt();
 			blackSmithID = cfg.get(Configuration.CATEGORY_GENERAL, "blackSmithID", 13).getInt();
+			echantmentBaseID = cfg.get(Configuration.CATEGORY_GENERAL, "echantmentBaseID", 77).getInt();
 			setBedrock = cfg.get(Configuration.CATEGORY_GENERAL, "setBedrock", false).getBoolean(false);
 			cfg.save();
 		} catch (Exception e) {
