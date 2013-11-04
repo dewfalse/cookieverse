@@ -13,6 +13,9 @@ public class BiomeEventHandler {
 	@ForgeSubscribe
 	public void getVillageBlockID(BiomeEvent.GetVillageBlockID event) {
 		boolean found = false;
+		if(event.biome == null) {
+			return;
+		}
 		for(BiomeGenBase biome : WorldChunkManagerCookieverse.cookieverseBiomeList) {
 			if(event.biome.biomeID == biome.biomeID) {
 				found = true;
