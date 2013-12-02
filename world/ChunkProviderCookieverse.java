@@ -606,7 +606,7 @@ IChunkProvider {
 	}
 
 	@Override
-	public void func_104112_b() {}
+	public void saveExtraData() {}
 
 	@Override
 	public boolean unloadQueuedChunks()

@@ -31,7 +31,7 @@ public class RenderMilkreeper extends RenderCreeper {
 
 			if (par2 == 1) {
 				float f1 = par1EntityCreeper.ticksExisted + par3;
-				this.func_110776_a(field_110831_a);
+				this.bindTexture(field_110831_a);
 				GL11.glMatrixMode(GL11.GL_TEXTURE);
 				GL11.glLoadIdentity();
 				float f2 = f1 * 0.01F;
@@ -60,7 +60,7 @@ public class RenderMilkreeper extends RenderCreeper {
 	}
 
 	@Override
-	protected ResourceLocation func_110829_a(EntityCreeper par1EntityCreeper) {
+	protected ResourceLocation getCreeperTextures(EntityCreeper par1EntityCreeper) {
 		return field_110830_f;
 	}
 

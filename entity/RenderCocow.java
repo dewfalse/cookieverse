@@ -39,7 +39,7 @@ public class RenderCocow extends RenderLiving {
 		super.renderEquippedItems(par1EntityCocow, par2);
 
 		if (!par1EntityCocow.isChild()) {
-			this.func_110776_a(TextureMap.field_110575_b);
+			this.bindTexture(TextureMap.locationBlocksTexture);
 			GL11.glEnable(GL11.GL_CULL_FACE);
 			GL11.glPushMatrix();
 			GL11.glScalef(1.0F, -1.0F, 1.0F);
@@ -82,7 +82,7 @@ public class RenderCocow extends RenderLiving {
 	}
 
 	@Override
-	protected ResourceLocation func_110775_a(Entity par1Entity) {
+	protected ResourceLocation getEntityTexture(Entity par1Entity) {
 		return this.getTexture((EntityCocow) par1Entity);
 	}
 

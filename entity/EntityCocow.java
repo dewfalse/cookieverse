@@ -34,7 +34,7 @@ public class EntityCocow extends EntityCow implements IShearable {
 		setDead();
 		EntityCow entitycow = new EntityCow(worldObj);
 		entitycow.setLocationAndAngles(posX, posY, posZ, rotationYaw, rotationPitch);
-		entitycow.setEntityHealth(func_110143_aJ());
+		entitycow.setHealth(getHealth());
 		entitycow.renderYawOffset = renderYawOffset;
 		worldObj.spawnEntityInWorld(entitycow);
 		worldObj.spawnParticle("largeexplode", posX, posY
