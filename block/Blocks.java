@@ -29,9 +29,9 @@ public class Blocks {
 	public static Block blockWhiteChocolate = new Block(Config.blockWhiteChocolateID, Material.clay).setHardness(3.0F).setResistance(10.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("cookieverse:blockWhiteChocolate").setTextureName("cookieverse:blockWhiteChocolate").setCreativeTab(Cookieverse.creativeTab);
 	public static Block blockBlackChocolate = new Block(Config.blockBlackChocolateID, Material.clay).setHardness(3.0F).setResistance(10.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("cookieverse:blockBlackChocolate").setTextureName("cookieverse:blockBlackChocolate").setCreativeTab(Cookieverse.creativeTab);
 
-	public static BlockFluid milkMoving = (BlockFluid)(new BlockLiquidMoving(Config.milkMovingID, Material.water)).setHardness(100.0F).setUnlocalizedName("cookieverse:milk").setTextureName("cookieverse:milk").setCreativeTab(Cookieverse.creativeTab);
-	public static Block milkStill = (new BlockLiquidStill(Config.milkStillID, Material.water)).setHardness(100.0F).setUnlocalizedName("cookieverse:milk").setTextureName("cookieverse:milk").setCreativeTab(Cookieverse.creativeTab);
-	public static BlockFluid hotChocolateMoving = (BlockFluid)(new BlockLiquidMoving(Config.hotChocolateMovingID, Material.lava)).setHardness(100.0F).setUnlocalizedName("cookieverse:hotChocolate").setTextureName("cookieverse:hotChocolate");
+	public static BlockFluid milkMoving;
+	public static Block milkStill;
+	public static BlockFluid hotChocolateMoving = (BlockFluid) (new BlockLiquidMoving(Config.hotChocolateMovingID, Material.lava)).setHardness(100.0F).setUnlocalizedName("cookieverse:hotChocolate").setTextureName("cookieverse:hotChocolate");
 	public static Block hotChocolateStill = (new BlockLiquidStill(Config.hotChocolateStillID, Material.lava)).setHardness(100.0F).setUnlocalizedName("cookieverse:hotChocolate").setTextureName("cookieverse:hotChocolate");
 
 	public static Block cookieDough = new BlockDough(Config.cookieDoughID, Material.clay).setHardness(0.5F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("cookieverse:cookieDough").setTextureName("cookieverse:cookieDough").setCreativeTab(Cookieverse.creativeTab);
@@ -50,7 +50,7 @@ public class Blocks {
 
 	public static Block portal = new BlockCookiePortal(Config.portalID, Material.portal).setLightValue(0.1F).setHardness(-1.0F).setResistance(6000000.0F).setUnlocalizedName("cookieverse:portal").setCreativeTab(Cookieverse.creativeTab);
 
-	public static Fluid milkFluid = new Fluid("milk").setBlockID(milkStill.blockID);
+	public static Fluid milkFluid;
 	public static Fluid hotChocolateFluid = new Fluid("hotChocolate").setBlockID(hotChocolateStill.blockID);
 
 	public static void preInit() {
@@ -67,24 +67,22 @@ public class Blocks {
 		registerBlock(blockBlackChocolate, "blockBlackChocolate", "ブラックチョコレートブロック");
 		MinecraftForge.setBlockHarvestLevel(blockBlackChocolate, "pickaxe", 2);
 
-		registerBlock(milkMoving, "milkMoving", "ミルク");
-		registerBlock(milkStill, "milkStill", "ミルク");
 		registerBlock(hotChocolateMoving, "hotChocolateMoving", "ホットチョコレート");
 		registerBlock(hotChocolateStill, "hotChocolateStill", "ホットチョコレート");
 
-		FluidRegistry.registerFluid(milkFluid);
-		FluidContainerRegistry
-				.registerFluidContainer(new FluidContainerData(new FluidStack(
-						milkFluid, FluidContainerRegistry.BUCKET_VOLUME),
-						new ItemStack(Item.bucketMilk), new ItemStack(
-								Item.bucketEmpty)));
+		if (Config.useOtherMilk == false) {
+			milkMoving = (BlockFluid) (new BlockLiquidMoving(Config.milkMovingID, Material.water)).setHardness(100.0F).setUnlocalizedName("cookieverse:milk").setTextureName("cookieverse:milk").setCreativeTab(Cookieverse.creativeTab);
+			registerBlock(milkMoving, "milkMoving", "ミルク");
+			milkStill = (new BlockLiquidStill(Config.milkStillID, Material.water)).setHardness(100.0F).setUnlocalizedName("cookieverse:milk").setTextureName("cookieverse:milk").setCreativeTab(Cookieverse.creativeTab);
+			registerBlock(milkStill, "milkStill", "ミルク");
+
+			milkFluid = new Fluid("milk").setBlockID(Config.milkStillID);
+			FluidRegistry.registerFluid(milkFluid);
+			FluidContainerRegistry.registerFluidContainer(new FluidContainerData(new FluidStack(milkFluid, FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(Item.bucketMilk), new ItemStack(Item.bucketEmpty)));
+		}
 
 		FluidRegistry.registerFluid(hotChocolateFluid);
-		FluidContainerRegistry
-				.registerFluidContainer(new FluidContainerData(new FluidStack(
-						hotChocolateFluid, FluidContainerRegistry.BUCKET_VOLUME),
-						new ItemStack(Items.bucketHotChocolate), new ItemStack(
-								Item.bucketEmpty)));
+		FluidContainerRegistry.registerFluidContainer(new FluidContainerData(new FluidStack(hotChocolateFluid, FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(Items.bucketHotChocolate), new ItemStack(Item.bucketEmpty)));
 
 		registerBlock(cookieDough, "cookieDough", "クッキー生地");
 		MinecraftForge.setBlockHarvestLevel(cookieDough, "shovel", 0);
@@ -125,9 +123,9 @@ public class Blocks {
 
 	@ForgeSubscribe
 	public void onTextureStitch(TextureStitchEvent.Post event) {
-		milkFluid.setIcons(milkStill.getIcon(0, 0),
-				milkStill.getIcon(2, 0));
-		hotChocolateFluid.setIcons(hotChocolateStill.getIcon(0, 0),
-				hotChocolateStill.getIcon(2, 0));
+		if (Config.useOtherMilk == false) {
+			milkFluid.setIcons(milkStill.getIcon(0, 0), milkStill.getIcon(2, 0));
+		}
+		hotChocolateFluid.setIcons(hotChocolateStill.getIcon(0, 0), hotChocolateStill.getIcon(2, 0));
 	}
 }

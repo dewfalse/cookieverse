@@ -58,14 +58,14 @@ public class Cookieverse {
 		MinecraftForge.TERRAIN_GEN_BUS.register(Blocks.cookieSapling);
 
 		String[] categories = {
-				ChestGenHooks.MINESHAFT_CORRIDOR,
-				ChestGenHooks.PYRAMID_DESERT_CHEST,
-				ChestGenHooks.PYRAMID_JUNGLE_CHEST,
-				ChestGenHooks.STRONGHOLD_CORRIDOR,
-				ChestGenHooks.STRONGHOLD_LIBRARY,
-				ChestGenHooks.STRONGHOLD_CROSSING,
-				ChestGenHooks.DUNGEON_CHEST,
-				ChestGenHooks.VILLAGE_BLACKSMITH,
+					ChestGenHooks.MINESHAFT_CORRIDOR,
+					ChestGenHooks.PYRAMID_DESERT_CHEST,
+					ChestGenHooks.PYRAMID_JUNGLE_CHEST,
+					ChestGenHooks.STRONGHOLD_CORRIDOR,
+					ChestGenHooks.STRONGHOLD_LIBRARY,
+					ChestGenHooks.STRONGHOLD_CROSSING,
+					ChestGenHooks.DUNGEON_CHEST,
+					ChestGenHooks.VILLAGE_BLACKSMITH,
 				};
 		for(String category : categories) {
 			ChestGenHooks.addItem(category, new WeightedRandomChestContent(new ItemStack(Items.exoticNuts), 1, 1, 3));

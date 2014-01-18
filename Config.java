@@ -77,6 +77,7 @@ public class Config {
 	public static boolean cookieVillage;
 	public static boolean setBedrock;
 	public static boolean milkExplosion;
+	public static boolean useOtherMilk;
 
 	public static void preInit(File file) {
 		Configuration cfg = new Configuration(file);
@@ -149,6 +150,7 @@ public class Config {
 			cookieVillage = cfg.get(Configuration.CATEGORY_GENERAL, "cookieVillage", true).getBoolean(true);
 			setBedrock = cfg.get(Configuration.CATEGORY_GENERAL, "setBedrock", false).getBoolean(false);
 			milkExplosion = cfg.get(Configuration.CATEGORY_GENERAL, "milkExplosion", true).getBoolean(true);
+			useOtherMilk = cfg.get(Configuration.CATEGORY_GENERAL, "useOtherMilk", false).getBoolean(false);
 			cfg.save();
 		} catch (Exception e) {
 			FMLLog.log(Level.SEVERE, e, Cookieverse.modid + " load config exception");

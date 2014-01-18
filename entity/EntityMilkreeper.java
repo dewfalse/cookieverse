@@ -6,7 +6,6 @@ import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import cookieverse.Config;
-import cookieverse.block.Blocks;
 
 public class EntityMilkreeper extends EntityCreeper {
 
@@ -34,8 +33,8 @@ public class EntityMilkreeper extends EntityCreeper {
 					int y = (int) (this.posY + this.rand.nextInt(10) - 5);
 					int z = (int) (this.posZ + this.rand.nextInt(10) - 5);
 					if (this.worldObj.isAirBlock(x, y, z)) {
-						this.worldObj.setBlock(x, y, z,
-								Blocks.milkMoving.blockID, 0, 0);
+						this.worldObj.setBlock(x, y, z, Config.useOtherMilk
+								? Config.milkStillID : Config.milkMovingID, 0, 0);
 					}
 				}
 			}

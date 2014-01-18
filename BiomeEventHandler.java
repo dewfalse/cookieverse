@@ -59,7 +59,8 @@ public class BiomeEventHandler {
 		} else if (event.original == Block.bookShelf.blockID) {
 			return;
 		} else if (event.original == Block.waterMoving.blockID) {
-			event.replacement = Blocks.milkMoving.blockID;
+			event.replacement = Config.useOtherMilk ? Config.milkStillID
+					: Config.milkMovingID;
 		} else if (event.original == Block.tilledField.blockID) {
 			event.replacement = Blocks.cookieDough.blockID;
 		} else {

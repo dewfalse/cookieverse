@@ -67,9 +67,9 @@ public class Recipes {
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.itemChocolateCookieDough),
 				Items.itemCookieDough, Items.itemChocolate);
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.itemBlackChocolateCookieDough),
-				Items.itemCookieDough, Items.itemWhiteChocolate);
-		GameRegistry.addShapelessRecipe(new ItemStack(Items.itemWhiteChocolateCookieDough),
 				Items.itemCookieDough, Items.itemBlackChocolate);
+		GameRegistry.addShapelessRecipe(new ItemStack(Items.itemWhiteChocolateCookieDough),
+				Items.itemCookieDough, Items.itemWhiteChocolate);
 	}
 
 	private static void registerToolsRecipes(Item item, Item[] items) {

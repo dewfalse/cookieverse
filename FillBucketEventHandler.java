@@ -19,6 +19,9 @@ public class FillBucketEventHandler {
 			return;
 		}
 
+		if(Config.useOtherMilk) {
+			return;
+		}
 		if(event.target.typeOfHit == EnumMovingObjectType.TILE) {
 			int blockID = event.world.getBlockId(event.target.blockX, event.target.blockY, event.target.blockZ);
 			int metadata = event.world.getBlockMetadata(event.target.blockX, event.target.blockY, event.target.blockZ);
