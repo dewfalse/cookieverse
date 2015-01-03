@@ -4,21 +4,22 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
 import cookieverse.Config;
 import cookieverse.CookieverseTeleporter;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockCookiePortal extends Block {
 
 	ForgeDirection[] dirs = {ForgeDirection.DOWN, ForgeDirection.UP, ForgeDirection.EAST,ForgeDirection.WEST, ForgeDirection.NORTH, ForgeDirection.SOUTH};
 
-	public BlockCookiePortal(int par1, Material par2Material) {
-		super(par1, par2Material);
+	public BlockCookiePortal( Material par2Material) {
+		super(par2Material);
 		this.setTickRandomly(true);
 	}
 
@@ -27,8 +28,8 @@ public class BlockCookiePortal extends Block {
 			Random par5Random) {
 		int n = 0;
 		for(ForgeDirection dir : dirs) {
-			int blockID = par1World.getBlockId(par2 + dir.offsetX, par3 + dir.offsetY, par4 + dir.offsetZ);
-			if(blockID == Blocks.blockChocolate.blockID || blockID == this.blockID) {
+			Block block = par1World.getBlock(par2 + dir.offsetX, par3 + dir.offsetY, par4 + dir.offsetZ);
+			if(block == Blocks.blockChocolate || block == this) {
 				n++;
 			}
 		}
@@ -45,7 +46,7 @@ public class BlockCookiePortal extends Block {
 @Override
 	public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World,
 			int par2, int par3, int par4) {
-		return AxisAlignedBB.getAABBPool().getAABB(0,0,0,0,0,0);
+		return AxisAlignedBB.getBoundingBox(0,0,0,0,0,0);
 	}
 
 
@@ -61,11 +62,11 @@ public class BlockCookiePortal extends Block {
 
 	@Override
 	public void onNeighborBlockChange(World par1World, int par2, int par3,
-			int par4, int par5) {
+			int par4, Block par5) {
 		int n = 0;
 		for(ForgeDirection dir : dirs) {
-			int blockID = par1World.getBlockId(par2 + dir.offsetX, par3 + dir.offsetY, par4 + dir.offsetZ);
-			if(blockID == Blocks.blockChocolate.blockID || blockID == this.blockID) {
+			Block block = par1World.getBlock(par2 + dir.offsetX, par3 + dir.offsetY, par4 + dir.offsetZ);
+			if(block == Blocks.blockChocolate || block == this) {
 				n++;
 			}
 		}
@@ -124,8 +125,8 @@ public class BlockCookiePortal extends Block {
 			d4 = (par5Random.nextFloat() - 0.5D) * 0.5D;
 			d5 = (par5Random.nextFloat() - 0.5D) * 0.5D;
 
-			if (par1World.getBlockId(par2 - 1, par3, par4) != this.blockID
-					&& par1World.getBlockId(par2 + 1, par3, par4) != this.blockID) {
+			if (par1World.getBlock(par2 - 1, par3, par4) != this
+					&& par1World.getBlock(par2 + 1, par3, par4) != this) {
 				d0 = par2 + 0.5D + 0.25D * i1;
 				d3 = (par5Random.nextFloat() * 2.0F * i1);
 			} else {
@@ -138,12 +139,12 @@ public class BlockCookiePortal extends Block {
 	}
 
 	@Override
-	public int idPicked(World par1World, int par2, int par3, int par4) {
-		return 0;
+	public Item getItem(World par1World, int par2, int par3, int par4) {
+		return null;
 	}
 
 	@Override
-	public void registerIcons(IconRegister par1IconRegister) {
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		this.blockIcon = par1IconRegister.registerIcon("cookieverse:portal");
 	}
 }

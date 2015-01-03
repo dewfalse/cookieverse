@@ -12,7 +12,6 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.LongHashMap;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.ChunkCoordIntPair;
-import net.minecraft.world.PortalPosition;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 import cookieverse.block.Blocks;
@@ -108,8 +107,12 @@ public class CookieverseTeleporter extends Teleporter {
 						int l1 = j + j1;
 						int i2 = k + i1 * b1 - l * b0;
 						boolean flag = j1 < 0;
-						this.worldServerInstance.setBlock(k1, l1, i2,
-								flag ? Blocks.blockChocolate.blockID : 0);
+                        if(flag) {
+                            this.worldServerInstance.setBlock(k1, l1, i2, Blocks.blockChocolate);
+                        }
+                        else {
+                            this.worldServerInstance.setBlockToAir(k1, l1, i2);
+                        }
 					}
 				}
 			}
@@ -153,9 +156,9 @@ public class CookieverseTeleporter extends Teleporter {
 					double d6 = l1 + 0.5D - par1Entity.posZ;
 
 					for (int i2 = this.worldServerInstance.getActualHeight() - 1; i2 >= 0; --i2) {
-						if (this.worldServerInstance.getBlockId(k1, i2, l1) == Blocks.portal.blockID) {
-							while (this.worldServerInstance.getBlockId(k1,
-									i2 - 1, l1) == Blocks.portal.blockID) {
+						if (this.worldServerInstance.getBlock(k1, i2, l1) == Blocks.portal) {
+							while (this.worldServerInstance.getBlock(k1,
+									i2 - 1, l1) == Blocks.portal) {
 								--i2;
 							}
 
@@ -177,7 +180,7 @@ public class CookieverseTeleporter extends Teleporter {
 		if (d3 >= 0.0D) {
 			if (flag) {
 				this.destinationCoordinateCache.add(j1,
-						new PortalPosition(this, i, j, k,
+						new PortalPosition(i, j, k,
 								this.worldServerInstance.getTotalWorldTime()));
 				this.destinationCoordinateKeys.add(Long.valueOf(j1));
 			}
@@ -187,19 +190,19 @@ public class CookieverseTeleporter extends Teleporter {
 			d4 = k + 0.5D;
 			int j2 = -1;
 
-			if (this.worldServerInstance.getBlockId(i - 1, j, k) == Blocks.portal.blockID) {
+			if (this.worldServerInstance.getBlock(i - 1, j, k) == Blocks.portal) {
 				j2 = 2;
 			}
 
-			if (this.worldServerInstance.getBlockId(i + 1, j, k) == Blocks.portal.blockID) {
+			if (this.worldServerInstance.getBlock(i + 1, j, k) == Blocks.portal) {
 				j2 = 0;
 			}
 
-			if (this.worldServerInstance.getBlockId(i, j, k - 1) == Blocks.portal.blockID) {
+			if (this.worldServerInstance.getBlock(i, j, k - 1) == Blocks.portal) {
 				j2 = 3;
 			}
 
-			if (this.worldServerInstance.getBlockId(i, j, k + 1) == Blocks.portal.blockID) {
+			if (this.worldServerInstance.getBlock(i, j, k + 1) == Blocks.portal) {
 				j2 = 1;
 			}
 
@@ -351,8 +354,8 @@ public class CookieverseTeleporter extends Teleporter {
 
 										if (l3 < 0
 												&& !this.worldServerInstance
-														.getBlockMaterial(k4,
-																j4, l4)
+														.getBlock(k4, j4, l4)
+                                                        .getMaterial()
 														.isSolid()
 												|| l3 >= 0
 												&& !this.worldServerInstance
@@ -407,8 +410,8 @@ public class CookieverseTeleporter extends Teleporter {
 
 										if (i4 < 0
 												&& !this.worldServerInstance
-														.getBlockMaterial(l3,
-																k4, j4)
+														.getBlock(l3, k4, j4)
+                                                        .getMaterial()
 														.isSolid()
 												|| i4 >= 0
 												&& !this.worldServerInstance
@@ -466,8 +469,12 @@ public class CookieverseTeleporter extends Teleporter {
 						j3 = j5 + l2;
 						i4 = j2 + (i3 - 1) * l5 - k2 * k5;
 						flag = l2 < 0;
-						this.worldServerInstance.setBlock(k3, j3, i4,
-								flag ? Blocks.blockChocolate.blockID : 0);
+                        if(flag) {
+                            this.worldServerInstance.setBlock(k3, j3, i4, Blocks.blockChocolate);
+                        }
+                        else {
+                            this.worldServerInstance.setBlockToAir(k3, j3, i4);
+                        }
 					}
 				}
 			}
@@ -481,8 +488,8 @@ public class CookieverseTeleporter extends Teleporter {
 					i4 = j2 + (i3 - 1) * l5;
 					flag = i3 == 0 || i3 == 3 || l2 == -1 || l2 == 3;
 					this.worldServerInstance.setBlock(k3, j3, i4,
-							flag ? Blocks.blockChocolate.blockID
-									: Blocks.portal.blockID, 0, 2);
+							flag ? Blocks.blockChocolate
+									: Blocks.portal, 0, 2);
 				}
 			}
 
@@ -493,7 +500,7 @@ public class CookieverseTeleporter extends Teleporter {
 					i4 = j2 + (i3 - 1) * l5;
 					this.worldServerInstance.notifyBlocksOfNeighborChange(k3,
 							j3, i4,
-							this.worldServerInstance.getBlockId(k3, j3, i4));
+							this.worldServerInstance.getBlock(k3, j3, i4));
 				}
 			}
 		}

@@ -1,17 +1,19 @@
 package cookieverse;
 
-import net.minecraft.block.Block;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.event.Event.Result;
-import net.minecraftforge.event.ForgeSubscribe;
-import net.minecraftforge.event.terraingen.BiomeEvent;
 import cookieverse.block.Blocks;
+import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.event.terraingen.BiomeEvent;
 import cookieverse.world.WorldChunkManagerCookieverse;
 
 public class BiomeEventHandler {
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void getVillageBlockID(BiomeEvent.GetVillageBlockID event) {
+		if (event == null) {
+			return;
+		}
 		if(event.biome == null) {
 			return;
 		}
@@ -26,48 +28,53 @@ public class BiomeEventHandler {
 			return;
 		}
 
-		if (event.original == Block.wood.blockID) {
-			event.replacement = Blocks.blackChocolateCookie.blockID;
-		} else if (event.original == Block.cobblestone.blockID) {
-			event.replacement = Blocks.cookie.blockID;
-		} else if (event.original == Block.planks.blockID) {
-			event.replacement = Blocks.chocolateCookie.blockID;
-		} else if (event.original == Block.stairsWoodOak.blockID) {
-			event.replacement = Blocks.whiteChocolateCookie.blockID;
-		} else if (event.original == Block.stairsCobblestone.blockID) {
-			event.replacement = Blocks.whiteChocolateCookie.blockID;
-		} else if (event.original == Block.gravel.blockID) {
-			event.replacement = Blocks.cookieDough.blockID;
-		} else if (event.original == Block.dirt.blockID) {
-			event.replacement = Blocks.blackChocolateCookieDough.blockID;
-		} else if (event.original == Block.furnaceIdle.blockID) {
+		if (event.original == Blocks.planks) {
+			event.replacement = Blocks.blackChocolateCookie;
+        } else if (event.original == Blocks.log) {
+            event.replacement = Blocks.blackChocolateCookie;
+        } else if (event.original == Blocks.log2) {
+            event.replacement = Blocks.blackChocolateCookie;
+        } else if (event.original == Blocks.cobblestone) {
+            event.replacement = Blocks.cookie;
+		} else if (event.original == Blocks.planks) {
+			event.replacement = Blocks.chocolateCookie;
+		} else if (event.original == Blocks.oak_stairs) {
+			event.replacement = Blocks.whiteChocolateCookie;
+		} else if (event.original == Blocks.stone_stairs) {
+			event.replacement = Blocks.whiteChocolateCookie;
+		} else if (event.original == Blocks.gravel) {
+			event.replacement = Blocks.cookieDough;
+		} else if (event.original == Blocks.dirt) {
+			event.replacement = Blocks.blackChocolateCookieDough;
+		} else if (event.original == Blocks.furnace) {
 			return;
-		} else if (event.original == Block.carrot.blockID) {
-			event.replacement = Blocks.cookieCrops.blockID;
-		} else if (event.original == Block.potato.blockID) {
-			event.replacement = Blocks.cookieCrops.blockID;
-		} else if (event.original == Block.crops.blockID) {
-			event.replacement = Blocks.cookieCrops.blockID;
-		} else if (event.original == Block.thinGlass.blockID) {
+		} else if (event.original == Blocks.carrots) {
+			event.replacement = Blocks.cookieCrops;
+		} else if (event.original == Blocks.potatoes) {
+			event.replacement = Blocks.cookieCrops;
+		} else if (event.original == Blocks.wheat) {
+			event.replacement = Blocks.cookieCrops;
+		} else if (event.original == Blocks.glass_pane) {
 			return;
-		} else if (event.original == Block.stoneDoubleSlab.blockID) {
-			event.replacement = Blocks.blackChocolateCookie.blockID;
-		} else if (event.original == Block.stoneSingleSlab.blockID) {
-			event.replacement = Blocks.blackChocolateCookie.blockID;
-		} else if (event.original == Block.fence.blockID) {
+		} else if (event.original == Blocks.double_stone_slab) {
+			event.replacement = Blocks.blackChocolateCookie;
+		} else if (event.original == Blocks.stone_slab) {
+			event.replacement = Blocks.blackChocolateCookie;
+		} else if (event.original == Blocks.fence) {
 			return;
-		} else if (event.original == Block.bookShelf.blockID) {
+		} else if (event.original == Blocks.bookshelf) {
 			return;
-		} else if (event.original == Block.waterMoving.blockID) {
-			event.replacement = Config.useOtherMilk ? Config.milkStillID
-					: Config.milkMovingID;
-		} else if (event.original == Block.tilledField.blockID) {
-			event.replacement = Blocks.cookieDough.blockID;
+        } else if (event.original == Blocks.flowing_water) {
+            event.replacement = Blocks.milkMoving;
+        } else if (event.original == Blocks.water) {
+            event.replacement = Blocks.milkStill;
+		} else if (event.original == Blocks.farmland) {
+			event.replacement = Blocks.cookieDough;
 		} else {
 			return;
 		}
 
-		event.setResult(Result.DENY);
+		event.setResult(Event.Result.DENY);
 
 	}
 

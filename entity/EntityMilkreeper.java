@@ -1,5 +1,6 @@
 package cookieverse.entity;
 
+import cookieverse.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -33,8 +34,7 @@ public class EntityMilkreeper extends EntityCreeper {
 					int y = (int) (this.posY + this.rand.nextInt(10) - 5);
 					int z = (int) (this.posZ + this.rand.nextInt(10) - 5);
 					if (this.worldObj.isAirBlock(x, y, z)) {
-						this.worldObj.setBlock(x, y, z, Config.useOtherMilk
-								? Config.milkStillID : Config.milkMovingID, 0, 0);
+						this.worldObj.setBlock(x, y, z, Blocks.milkMoving, 0, 0);
 					}
 				}
 			}

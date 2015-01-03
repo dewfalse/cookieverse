@@ -36,7 +36,7 @@ public class EnchantmentExoticNuts extends Enchantment {
 
 	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack) {
-		return stack.itemID == Items.strangeNuts.itemID && !stack.isItemEnchanted();
+		return stack.getItem() == Items.strangeNuts && !stack.isItemEnchanted();
 	}
 
 	@Override
@@ -46,6 +46,6 @@ public class EnchantmentExoticNuts extends Enchantment {
 
 	@Override
 	public boolean canApply(ItemStack par1ItemStack) {
-		return par1ItemStack.itemID == Items.strangeNuts.itemID && !par1ItemStack.isItemEnchanted();
+		return par1ItemStack.getItem() == Items.strangeNuts && !par1ItemStack.isItemEnchanted();
 	}
 }

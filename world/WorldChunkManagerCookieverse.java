@@ -23,7 +23,7 @@ public class WorldChunkManagerCookieverse extends WorldChunkManager {
 
 	public static final BiomeGenBase cookieDough = (new BiomeGenCookieDough(Config.biomeID)).setColor(0xFFB2E4).setTemperatureRainfall(0.8F, 0.4F).setBiomeName("CookieDough");
 	public static final BiomeGenBase chocolateCookieDough = (new BiomeGenChocolateCookieDough(Config.biomeID + 1)).setColor(0x234BFF).setTemperatureRainfall(1.2F, 0.9F).setBiomeName("ChocolateCookieDough");
-	public static final BiomeGenBase whiteChocolateCookieDough = (new BiomeGenWhiteChocolateCookieDough(Config.biomeID + 2)).setColor(0xEDEFFF).setEnableSnow().setMinMaxHeight(0.3F, 1.3F).setTemperatureRainfall(0.0F, 0.5F).setBiomeName("WhiteChocolateCookieDough");
+	public static final BiomeGenBase whiteChocolateCookieDough = (new BiomeGenWhiteChocolateCookieDough(Config.biomeID + 2)).setColor(0xEDEFFF).setEnableSnow().setHeight(new BiomeGenBase.Height(0.3F, 1.3F)).setTemperatureRainfall(0.0F, 0.5F).setBiomeName("WhiteChocolateCookieDough");
 	public static final BiomeGenBase blackChocolateCookieDough = (new BiomeGenBlackChocolateCookieDough(Config.biomeID + 3)).setColor(0xFF692D).setTemperatureRainfall(0.7F, 0.8F).setBiomeName("BlackChocolateCookieDough");
 
 	public static final BiomeGenBase[] cookieverseBiomeList = { cookieDough, chocolateCookieDough, whiteChocolateCookieDough, blackChocolateCookieDough, };
@@ -100,30 +100,6 @@ public class WorldChunkManagerCookieverse extends WorldChunkManager {
 	@SideOnly(Side.CLIENT)
 	public float getTemperatureAtHeight(float par1, int par2) {
 		return par1;
-	}
-
-	@Override
-	public float[] getTemperatures(float[] par1ArrayOfFloat, int par2,
-			int par3, int par4, int par5) {
-		IntCache.resetIntCache();
-
-		if (par1ArrayOfFloat == null || par1ArrayOfFloat.length < par4 * par5) {
-			par1ArrayOfFloat = new float[par4 * par5];
-		}
-
-		int[] var6 = this.biomeIndexLayer.getInts(par2, par3, par4, par5);
-
-		for (int var7 = 0; var7 < par4 * par5; ++var7) {
-			float var8 = biomeList[var6[var7]].getIntTemperature() / 65536.0F;
-
-			if (var8 > 1.0F) {
-				var8 = 1.0F;
-			}
-
-			par1ArrayOfFloat[var7] = var8;
-		}
-
-		return par1ArrayOfFloat;
 	}
 
 	@Override

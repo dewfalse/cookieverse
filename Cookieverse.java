@@ -17,10 +17,8 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkMod;
 
-@Mod(modid = Cookieverse.modid, name = Cookieverse.modid, version = "1.0")
-@NetworkMod
+@Mod(modid = Cookieverse.modid, name = Cookieverse.modid, version = "1.7.10.10")
 public class Cookieverse {
 	public static final String modid = "cookieverse";
 

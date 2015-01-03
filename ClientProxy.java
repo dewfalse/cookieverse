@@ -9,7 +9,7 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void preInit() {
-		MinecraftForge.EVENT_BUS.register(new Blocks());
+		MinecraftForge.EVENT_BUS.register(new TextureStitchEventHandler());
 	}
 	@Override
 	public void init() {

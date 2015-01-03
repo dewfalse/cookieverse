@@ -1,21 +1,21 @@
 package cookieverse;
 
+import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.event.Event.Result;
-import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemExoticNuts extends ItemFood {
 
-	public ItemExoticNuts(int par1, int par2, float par3, boolean par4) {
-		super(par1, par2, par3, par4);
+	public ItemExoticNuts(int par2, float par3, boolean par4) {
+		super(par2, par3, par4);
 	}
 
 	public ItemExoticNuts(int par1, int par2, boolean par3) {
@@ -41,12 +41,12 @@ public class ItemExoticNuts extends ItemFood {
 		return itemStack;
 	}
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onEntity(ItemTossEvent event) {
 		if(event.isCanceled()) {
 			return;
 		}
-		if(event.getResult() != Result.DEFAULT) {
+		if(event.getResult() != Event.Result.DEFAULT) {
 			return;
 		}
 		if(event.player.dimension != 1) {
@@ -55,10 +55,10 @@ public class ItemExoticNuts extends ItemFood {
 		if(event.entityItem.worldObj.isRemote) {
 			return;
 		}
-		if(event.entityItem.getEntityItem().itemID == Item.dyePowder.itemID && event.entityItem.getEntityItem().getItemDamage() == 3) {
+		if(event.entityItem.getEntityItem().getItem()== Items.dye && event.entityItem.getEntityItem().getItemDamage() == 3) {
 			ItemStack itemStack = new ItemStack(Items.exoticNuts, event.entityItem.getEntityItem().stackSize);
 			event.entityItem.setEntityItemStack(itemStack);
-			event.setResult(Result.ALLOW);
+			event.setResult(Event.Result.ALLOW);
 		}
 	}
 

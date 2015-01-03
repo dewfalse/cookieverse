@@ -9,18 +9,18 @@ public class BiomeGenBlackChocolateCookieDough extends BiomeGenCookieverse {
 
 	public BiomeGenBlackChocolateCookieDough(int par1) {
 		super(par1);
-		mainBlockID = Blocks.blackChocolateCookieDough.blockID;
-		this.theBiomeDecorator.sandGen = new WorldGenSand(7, Blocks.cookieDough.blockID);
-		this.theBiomeDecorator.gravelAsSandGen = new WorldGenSand(6, Blocks.whiteChocolateCookieDough.blockID);
-		this.theBiomeDecorator.dirtGen = new WorldGenMinable(Blocks.blackChocolateCookie.blockID, 32, mainBlockID);
-		this.theBiomeDecorator.gravelGen = new WorldGenMinable(Blocks.cookie.blockID, 32, mainBlockID);
-		this.theBiomeDecorator.coalGen = new WorldGenMinable(Blocks.chocolateCookieDough.blockID, 16, mainBlockID);
-		this.theBiomeDecorator.ironGen = new WorldGenMinable(Blocks.oreChocolate.blockID, 8, mainBlockID);
-		this.theBiomeDecorator.goldGen = new WorldGenMinable(Blocks.oreWhiteChocolate.blockID, 8, mainBlockID);
-		this.theBiomeDecorator.redstoneGen = new WorldGenMinable(Blocks.oreBlackChocolate.blockID, 7, mainBlockID);
-		this.theBiomeDecorator.diamondGen = new WorldGenMinable(Block.blockRedstone.blockID, 3, mainBlockID);
-		this.theBiomeDecorator.lapisGen = new WorldGenMinable(Blocks.whiteChocolateCookie.blockID, 6, mainBlockID);
-		this.worldGeneratorTrees = new WorldGeneratorCookieTrees(false, Blocks.blackChocolateCookie.blockID);
+		mainBlock = Blocks.blackChocolateCookieDough;
+		this.theBiomeDecorator.sandGen = new WorldGenSand(Blocks.cookieDough, 7);
+		this.theBiomeDecorator.gravelAsSandGen = new WorldGenSand(Blocks.whiteChocolateCookieDough, 6);
+		this.theBiomeDecorator.dirtGen = new WorldGenMinable(Blocks.blackChocolateCookie, 32, mainBlock);
+		this.theBiomeDecorator.gravelGen = new WorldGenMinable(Blocks.cookie, 32, mainBlock);
+		this.theBiomeDecorator.coalGen = new WorldGenMinable(Blocks.chocolateCookieDough, 16, mainBlock);
+		this.theBiomeDecorator.ironGen = new WorldGenMinable(Blocks.oreChocolate, 8, mainBlock);
+		this.theBiomeDecorator.goldGen = new WorldGenMinable(Blocks.oreWhiteChocolate, 8, mainBlock);
+		this.theBiomeDecorator.redstoneGen = new WorldGenMinable(Blocks.oreBlackChocolate, 7, mainBlock);
+		this.theBiomeDecorator.diamondGen = new WorldGenMinable(Blocks.redstone_block, 3, mainBlock);
+		this.theBiomeDecorator.lapisGen = new WorldGenMinable(Blocks.whiteChocolateCookie, 6, mainBlock);
+		this.worldGeneratorTrees = new WorldGeneratorCookieTrees(false, Blocks.blackChocolateCookie);
 	}
 
 }

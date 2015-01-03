@@ -1,5 +1,6 @@
 package cookieverse.entity;
 
+import cookieverse.Items;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.player.EntityPlayer;
@@ -7,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 public class EntitySughast extends EntityGhast {
@@ -20,7 +22,7 @@ public class EntitySughast extends EntityGhast {
 
 	@Override
 	protected void updateEntityActionState() {
-		if (!this.worldObj.isRemote && this.worldObj.difficultySetting == 0) {
+		if (!this.worldObj.isRemote && this.worldObj.difficultySetting == EnumDifficulty.PEACEFUL) {
 			this.setDead();
 		}
 
@@ -147,8 +149,8 @@ public class EntitySughast extends EntityGhast {
     }
 
 	@Override
-	protected int getDropItemId() {
-		return Item.sugar.itemID;
+	protected Item getDropItem() {
+		return Items.sugar;
 	}
 
 	@Override
@@ -157,13 +159,13 @@ public class EntitySughast extends EntityGhast {
 		int k;
 
 		for (k = 0; k < j; ++k) {
-			this.dropItem(Item.ghastTear.itemID, 1);
+			this.dropItem(Items.ghast_tear, 1);
 		}
 
 		j = this.rand.nextInt(3) + this.rand.nextInt(1 + par2);
 
 		for (k = 0; k < j; ++k) {
-			this.dropItem(Item.sugar.itemID, 1);
+			this.dropItem(Items.sugar, 1);
 		}
 	}
 

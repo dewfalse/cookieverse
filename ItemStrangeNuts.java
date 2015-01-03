@@ -10,8 +10,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemStrangeNuts extends ItemFood {
 
-	public ItemStrangeNuts(int par1, int par2, float par3, boolean par4) {
-		super(par1, par2, par3, par4);
+	public ItemStrangeNuts(int par2, float par3, boolean par4) {
+		super(par2, par3, par4);
 	}
 
 	public ItemStrangeNuts(int par1, int par2, boolean par3) {
@@ -35,15 +35,6 @@ public class ItemStrangeNuts extends ItemFood {
 			return EnumRarity.epic;
 		}
 		return super.getRarity(par1ItemStack);
-	}
-
-	@Override
-	public String getItemDisplayName(ItemStack par1ItemStack) {
-		if(par1ItemStack.isItemEnchanted()) {
-			ItemStack itemStack = new ItemStack(Items.exoticNuts);
-			return Items.exoticNuts.getItemDisplayName(itemStack);
-		}
-		return super.getItemDisplayName(par1ItemStack);
 	}
 
 	@Override

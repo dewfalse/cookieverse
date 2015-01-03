@@ -1,5 +1,6 @@
 package cookieverse.entity;
 
+import cookieverse.Items;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -47,7 +48,7 @@ public class EntitySugarBullet extends EntityLargeFireball {
 
 			for (int i = 0; i < this.rand.nextInt(5) + 1; ++i) {
 				EntityItem entityItem = new EntityItem(worldObj, this.posX,
-						this.posY, this.posZ, new ItemStack(Item.sugar));
+						this.posY, this.posZ, new ItemStack(Items.sugar));
 				double motionX = this.rand.nextGaussian() * 2 - 1;
 				double motionY = this.rand.nextGaussian();
 				double motionZ = this.rand.nextGaussian() * 2 - 1;

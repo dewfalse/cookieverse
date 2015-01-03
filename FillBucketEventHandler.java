@@ -1,40 +1,41 @@
 package cookieverse;
 
+import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumMovingObjectType;
-import net.minecraftforge.event.Event.Result;
-import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import cookieverse.block.Blocks;
 
 public class FillBucketEventHandler {
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onFillBucketEvent(FillBucketEvent event) {
 		if(event.isCanceled()) {
 			return;
 		}
-		if(event.getResult() != Result.DEFAULT) {
+		if(event.getResult() != Event.Result.DEFAULT) {
 			return;
 		}
 
 		if(Config.useOtherMilk) {
 			return;
 		}
-		if(event.target.typeOfHit == EnumMovingObjectType.TILE) {
-			int blockID = event.world.getBlockId(event.target.blockX, event.target.blockY, event.target.blockZ);
+		if(event.target.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
+			Block block = event.world.getBlock(event.target.blockX, event.target.blockY, event.target.blockZ);
 			int metadata = event.world.getBlockMetadata(event.target.blockX, event.target.blockY, event.target.blockZ);
-			if( (blockID == Blocks.milkMoving.blockID || blockID == Blocks.milkStill.blockID) && metadata == 0) {
+			if( (block == Blocks.milkMoving || block == Blocks.milkStill) && metadata == 0) {
 				event.world.setBlockToAir(event.target.blockX, event.target.blockY, event.target.blockZ);
-				event.result = new ItemStack(Item.bucketMilk);
-				event.setResult(Result.ALLOW);
+				event.result = new ItemStack(Items.milk_bucket);
+				event.setResult(Event.Result.ALLOW);
 				return;
 			}
-			if( (blockID == Blocks.hotChocolateMoving.blockID || blockID == Blocks.hotChocolateStill.blockID) && metadata == 0) {
+			if( (block == Blocks.hotChocolateMoving || block == Blocks.hotChocolateStill) && metadata == 0) {
 				event.world.setBlockToAir(event.target.blockX, event.target.blockY, event.target.blockZ);
 				event.result = new ItemStack(Items.bucketHotChocolate);
-				event.setResult(Result.ALLOW);
+				event.setResult(Event.Result.ALLOW);
 				return;
 			}
 		}

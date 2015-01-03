@@ -6,29 +6,29 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenTrees;
-import net.minecraftforge.common.ForgeDirection;
 import cookieverse.block.Blocks;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class WorldGeneratorCookieTrees extends WorldGenTrees {
 
 	private final int minTreeHeight;
 	private final int metaWood;
-	private final int leavesID;
+	private final Block leavesBlock;
 
 	public WorldGeneratorCookieTrees(boolean par1) {
-		this(par1, 4, 0, Blocks.chocolateCookie.blockID, false);
+		this(par1, 4, 0, Blocks.chocolateCookie, false);
 	}
 
-	public WorldGeneratorCookieTrees(boolean par1, int par2) {
+	public WorldGeneratorCookieTrees(boolean par1, Block par2) {
 		this(par1, 4, 0, par2, false);
 	}
 
 	public WorldGeneratorCookieTrees(boolean par1, int par2, int par3,
-			int par4, boolean par5) {
+                                     Block par4, boolean par5) {
 		super(par1);
 		this.minTreeHeight = par2;
 		this.metaWood = par3;
-		this.leavesID = par4;
+		this.leavesBlock = par4;
 	}
 
 	@Override
@@ -57,21 +57,19 @@ public class WorldGeneratorCookieTrees extends WorldGenTrees {
 				for (int l1 = par3 - b0; l1 <= par3 + b0 && flag; ++l1) {
 					for (j1 = par5 - b0; j1 <= par5 + b0 && flag; ++j1) {
 						if (i1 >= 0 && i1 < 256) {
-							k1 = par1World.getBlockId(l1, i1, j1);
+                            Block block = par1World.getBlock(l1, i1, j1);
 
-							Block block = Block.blocksList[k1];
-
-							if (k1 != 0
+							if (par1World.isAirBlock(l1, i1, j1) == false
 									&& !block.isLeaves(par1World, l1, i1, j1)
-									&& k1 != Blocks.cookieDough.blockID
-									&& k1 != Blocks.chocolateCookieDough.blockID
-									&& k1 != Blocks.whiteChocolateCookieDough.blockID
-									&& k1 != Blocks.blackChocolateCookieDough.blockID
-									&& k1 != Blocks.cookie.blockID
-									&& k1 != Blocks.chocolateCookie.blockID
-									&& k1 != Blocks.whiteChocolateCookie.blockID
-									&& k1 != Blocks.blackChocolateCookie.blockID
-									&& k1 != Blocks.cookieSapling.blockID
+									&& block != Blocks.cookieDough
+									&& block != Blocks.chocolateCookieDough
+									&& block != Blocks.whiteChocolateCookieDough
+									&& block != Blocks.blackChocolateCookieDough
+									&& block != Blocks.cookie
+									&& block != Blocks.chocolateCookie
+									&& block != Blocks.whiteChocolateCookie
+									&& block != Blocks.blackChocolateCookie
+									&& block != Blocks.cookieSapling
 									&& !block.isWood(par1World, l1, i1, j1)) {
 								flag = false;
 							}
@@ -85,9 +83,8 @@ public class WorldGeneratorCookieTrees extends WorldGenTrees {
 			if (!flag) {
 				return false;
 			} else {
-				par1World.setBlock(par3, par4, par5, 0, 0, 4);
-				i1 = par1World.getBlockId(par3, par4 - 1, par5);
-				Block soil = Block.blocksList[i1];
+				par1World.setBlockToAir(par3, par4, par5);
+				Block soil = par1World.getBlock(par3, par4 - 1, par5);
 				boolean isSoil = (soil != null && soil.canSustainPlant(
 						par1World, par3, par4 - 1, par5, ForgeDirection.UP,
 						(BlockSapling) Blocks.cookieSapling));
@@ -114,15 +111,14 @@ public class WorldGeneratorCookieTrees extends WorldGenTrees {
 								if (Math.abs(k2) != i2 || Math.abs(i3) != i2
 										|| par2Random.nextInt(2) != 0
 										&& k1 != 0) {
-									int j3 = par1World.getBlockId(j2, j1, l2);
-									Block block = Block.blocksList[j3];
+                                    Block block = par1World.getBlock(j2, j1, l2);
 
 									if (block == null
 											|| block.canBeReplacedByLeaves(
 													par1World, j2, j1, l2)) {
-										this.setBlockAndMetadata(par1World, j2,
+										this.setBlockAndNotifyAdequately(par1World, j2,
 												j1, l2,
-												this.leavesID, 0);
+												this.leavesBlock, 0);
 									}
 								}
 							}
@@ -130,16 +126,14 @@ public class WorldGeneratorCookieTrees extends WorldGenTrees {
 					}
 
 					for (j1 = 0; j1 < l; ++j1) {
-						k1 = par1World.getBlockId(par3, par4 + j1, par5);
+                        Block block = par1World.getBlock(par3, par4 + j1, par5);
 
-						Block block = Block.blocksList[k1];
-
-						if (k1 == 0
+						if (par1World.isAirBlock(par3, par4 + j1, par5)
 								|| block == null
 								|| block.isLeaves(par1World, par3, par4 + j1,
 										par5)) {
-							this.setBlockAndMetadata(par1World, par3,
-									par4 + j1, par5, Blocks.cookie.blockID,
+							this.setBlockAndNotifyAdequately(par1World, par3,
+									par4 + j1, par5, Blocks.cookie,
 									this.metaWood);
 
 						}

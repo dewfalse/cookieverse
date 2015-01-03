@@ -2,13 +2,13 @@ package cookieverse.block;
 
 import java.awt.Color;
 
+import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.BlockSapling;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.util.Icon;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraftforge.event.Event.Result;
-import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.terraingen.SaplingGrowTreeEvent;
 import cookieverse.world.WorldGeneratorCookieTrees;
@@ -17,19 +17,19 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCookieSapling extends BlockSapling {
 
-	public BlockCookieSapling(int par1) {
-		super(par1);
+	public BlockCookieSapling() {
+		super();
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public Icon getIcon(int par1, int par2) {
+	public IIcon getIcon(int par1, int par2) {
 		return blockIcon;
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void registerIcons(IconRegister par1IconRegister) {
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		this.blockIcon = par1IconRegister.registerIcon("cookieverse:cookieSapling");
 	}
 
@@ -49,32 +49,32 @@ public class BlockCookieSapling extends BlockSapling {
 		return Color.WHITE.getRGB();
 	}
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onBonemealEvent(BonemealEvent event) {
 		if(event.world.isRemote) {
 			return;
 		}
-		if(event.world.getBlockId(event.X, event.Y, event.Z) == Blocks.cookieSapling.blockID) {
+		if(event.world.getBlock(event.x, event.y, event.z) == Blocks.cookieSapling) {
 			if (event.world.rand.nextFloat() < 0.45D) {
 				WorldGenerator g = new WorldGeneratorCookieTrees(true);
-				event.world.setBlock(event.X, event.Y, event.Z, 0, 0, 4);
-				g.generate(event.world, event.world.rand, event.X, event.Y, event.Z);
-				event.setResult(Result.ALLOW);
+				event.world.setBlockToAir(event.x, event.y, event.z);
+				g.generate(event.world, event.world.rand, event.x, event.y, event.z);
+				event.setResult(Event.Result.ALLOW);
 			}
 		}
 	}
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onSaplingGrowTreeEvent(SaplingGrowTreeEvent event) {
 		if(event.isCanceled()) {
 			return;
 		}
-		if(event.getResult() != Result.DEFAULT) {
+		if(event.getResult() != Event.Result.DEFAULT) {
 			return;
 		}
-		if(event.world.getBlockId(event.x, event.y, event.z) == Blocks.cookieSapling.blockID) {
+		if(event.world.getBlock(event.x, event.y, event.z) == Blocks.cookieSapling) {
 			(new WorldGeneratorCookieTrees(true)).generate(event.world, event.rand, event.x, event.y, event.z);
-			event.setResult(Result.DENY);
+			event.setResult(Event.Result.DENY);
 		}
 
 	}

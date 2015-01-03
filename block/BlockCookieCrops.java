@@ -2,32 +2,32 @@ package cookieverse.block;
 
 import cookieverse.Items;
 import net.minecraft.block.BlockCrops;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 
 public class BlockCookieCrops extends BlockCrops {
 
-	private Icon[] iconArray;
+	private IIcon[] iconArray;
 
-	public BlockCookieCrops(int par1) {
-		super(par1);
+	public BlockCookieCrops() {
+		super();
 		disableStats();
 	}
 
 
 	@Override
-	protected int getSeedItem() {
-		return Items.cookieSeeds.itemID;
+	protected Item func_149866_i() {
+		return Items.cookieSeeds;
 	}
 
 	@Override
-	protected int getCropItem() {
-		return Item.cookie.itemID;
+	protected Item func_149865_P() {
+		return Items.cookie;
 	}
 
 	@Override
-	public Icon getIcon(int par1, int par2) {
+	public IIcon getIcon(int par1, int par2) {
 		if (par2 < 0 || par2 > 7) {
 			par2 = 7;
 		}
@@ -36,8 +36,8 @@ public class BlockCookieCrops extends BlockCrops {
 	}
 
 	@Override
-	public void registerIcons(IconRegister par1IconRegister) {
-		this.iconArray = new Icon[8];
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
+		this.iconArray = new IIcon[8];
 
 		for (int i = 0; i < this.iconArray.length; ++i) {
 			this.iconArray[i] = par1IconRegister.registerIcon("cookieverse:crops_" + i);

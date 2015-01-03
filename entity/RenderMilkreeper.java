@@ -20,7 +20,7 @@ public class RenderMilkreeper extends RenderCreeper {
 	}
 
 	@Override
-	protected int renderCreeperPassModel(EntityCreeper par1EntityCreeper,
+	protected int shouldRenderPass(EntityCreeper par1EntityCreeper,
 			int par2, float par3) {
 		if (par1EntityCreeper.getPowered()) {
 			if (par1EntityCreeper.isInvisible()) {
@@ -60,7 +60,7 @@ public class RenderMilkreeper extends RenderCreeper {
 	}
 
 	@Override
-	protected ResourceLocation getCreeperTextures(EntityCreeper par1EntityCreeper) {
+	protected ResourceLocation getEntityTexture(EntityCreeper par1EntityCreeper) {
 		return field_110830_f;
 	}
 

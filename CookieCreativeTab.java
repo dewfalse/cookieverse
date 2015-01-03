@@ -16,10 +16,15 @@ public class CookieCreativeTab extends CreativeTabs {
 
 	@Override
 	public ItemStack getIconItemStack() {
-		return new ItemStack(Item.cookie);
+		return new ItemStack(Items.cookie);
 	}
 
-	@Override
+    @Override
+    public Item getTabIconItem() {
+        return Items.cookie;
+    }
+
+    @Override
 	public String getTranslatedTabLabel() {
 		return "Cookieverse";
 	}
